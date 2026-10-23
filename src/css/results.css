@@ -1,0 +1,125 @@
+/* =========================================================
+   TRIPSUGGEST - RESULTS PAGE STYLES
+   ========================================================= */
+
+.results-container {
+    width: min(1150px,92%);
+    margin: 50px auto 80px;
+}
+
+.result-heading {
+    margin-bottom: 25px;
+}
+
+.result-heading h2 {
+    color: var(--navy);
+}
+
+.result-heading p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+}
+
+.result-card {
+    background: white;
+    border-radius: 17px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: 0.3s;
+}
+
+.result-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+.result-image {
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.match {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--teal);
+    color: white;
+    padding: 7px 11px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.result-body {
+    padding: 20px;
+}
+
+.result-body h3 {
+    color: var(--navy);
+}
+
+.result-body p {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.result-tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin: 13px 0;
+}
+
+.result-tags span {
+    background: var(--light-teal);
+    color: var(--teal);
+    padding: 5px 8px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 600;
+}
+
+.result-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.result-price {
+    color: var(--teal);
+    font-weight: 800;
+}
+
+.save-btn {
+    border: 1px solid var(--border);
+    background: white;
+    padding: 8px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px) {
+    .result-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px) {
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.result-actions {
+    margin-top: 14px;
+}

@@ -1,0 +1,36 @@
+/* =========================================================
+   TRIPSUGGEST - FAQ PAGE STYLES
+   ========================================================= */
+
+.faq-container {
+    width: min(850px,92%);
+    margin: auto;
+}
+
+.faq {
+    background: white;
+    border-radius: 12px;
+    margin-bottom: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.faq-question {
+    padding: 18px;
+    font-weight: 700;
+    color: var(--navy);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+}
+
+.faq-answer {
+    display: none;
+    padding: 0 18px 18px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.faq.open .faq-answer {
+    display: block;
+}

@@ -1,0 +1,82 @@
+/* =========================================================
+   TRIPSUGGEST - CONTACT PAGE STYLES
+   ========================================================= */
+
+.contact-container {
+    width: min(950px,92%);
+    margin: auto;
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 25px;
+}
+
+.contact-info,
+.contact-form {
+    background: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+}
+
+.contact-info h2,
+.contact-form h2 {
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.contact-info p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+
+.contact-item {
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+}
+
+/* Reuse .input-group from trip-planner for the contact form inputs */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--navy);
+}
+
+.input-group input,
+.input-group textarea {
+    width: 100%;
+    padding: 13px 15px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #FBFDFF;
+    color: var(--text);
+    font-size: 14px;
+    outline: none;
+    transition: 0.25s;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(0,168,150,0.1);
+}
+
+.input-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:700px) {
+    .contact-container {
+        grid-template-columns: 1fr;
+    }
+}

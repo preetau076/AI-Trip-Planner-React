@@ -1,0 +1,65 @@
+/* =========================================================
+   TRIPSUGGEST - PACKAGES PAGE STYLES
+   ========================================================= */
+
+.package-grid {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 22px;
+}
+
+.package-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.package-image {
+    height: 210px;
+    background-size: cover;
+    background-position: center;
+}
+
+.package-body {
+    padding: 22px;
+}
+
+.package-body h3 {
+    color: var(--navy);
+}
+
+.package-body p {
+    color: var(--muted);
+    font-size: 13px;
+    margin: 7px 0;
+}
+
+.package-details {
+    display: flex;
+    justify-content: space-between;
+    margin: 17px 0;
+    font-size: 12px;
+}
+
+.package-price {
+    color: var(--teal);
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1000px) {
+    .package-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+
+@media(max-width:700px) {
+    .package-grid {
+        grid-template-columns: 1fr;
+    }
+}

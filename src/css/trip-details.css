@@ -1,0 +1,158 @@
+/* =========================================================
+   TRIPSUGGEST - TRIP DETAILS PAGE STYLES
+   ========================================================= */
+
+.details-container {
+    width: min(1100px,92%);
+    margin: 50px auto 80px;
+}
+
+.trip-detail-header {
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.trip-detail-image {
+    height: 350px;
+    background-size: cover;
+    background-position: center;
+}
+
+.trip-detail-info {
+    padding: 30px;
+}
+
+.trip-detail-info h1 {
+    color: var(--navy);
+    margin-bottom: 8px;
+}
+
+.trip-detail-info p {
+    color: var(--muted);
+}
+
+.detail-stats {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.stat {
+    padding: 14px;
+    background: var(--background);
+    border-radius: 10px;
+}
+
+.stat small {
+    display: block;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.stat strong {
+    color: var(--navy);
+    font-size: 13px;
+}
+
+.itinerary {
+    margin-top: 25px;
+}
+
+.itinerary h2 {
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.day {
+    background: white;
+    padding: 20px;
+    margin-bottom: 12px;
+    border-radius: 13px;
+    box-shadow: var(--shadow);
+    border-left: 4px solid var(--teal);
+}
+
+.day h3 {
+    color: var(--teal);
+    font-size: 15px;
+}
+
+.day p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.detail-actions {
+    margin-top: 22px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:700px) {
+    .detail-stats {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .trip-detail-image {
+        height: 250px;
+    }
+}
+
+@media(max-width:420px) {
+    .detail-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ================= BUDGET ================= */
+
+.budget-section {
+    margin-top: 25px;
+}
+
+.budget-section h2 {
+    color: var(--navy);
+    margin-bottom: 15px;
+}
+
+.budget-card {
+    background: white;
+    padding: 22px 25px;
+    border-radius: 13px;
+    box-shadow: var(--shadow);
+}
+
+.budget-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    color: var(--text);
+}
+
+.budget-row strong {
+    color: var(--navy);
+}
+
+.budget-row.total {
+    border-bottom: none;
+    padding-top: 15px;
+    font-size: 16px;
+}
+
+.budget-row.total strong {
+    color: var(--teal);
+}
+
+.budget-note {
+    margin-top: 12px;
+    color: var(--muted);
+    font-size: 11px;
+}

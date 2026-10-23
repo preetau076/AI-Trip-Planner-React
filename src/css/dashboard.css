@@ -1,0 +1,104 @@
+/* =========================================================
+   TRIPSUGGEST - DASHBOARD PAGE STYLES
+   ========================================================= */
+
+.dashboard {
+    width: min(1200px,92%);
+    margin: 45px auto 80px;
+}
+
+.dashboard-welcome {
+    background: linear-gradient(135deg,var(--dark-navy),var(--navy));
+    padding: 30px;
+    color: white;
+    border-radius: 17px;
+    margin-bottom: 25px;
+}
+
+.dashboard-welcome h1 {
+    margin-bottom: 5px;
+}
+
+.dashboard-welcome p {
+    color: #C7D4DF;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.dashboard-card {
+    background: white;
+    padding: 22px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.dashboard-card small {
+    color: var(--muted);
+}
+
+.dashboard-card h2 {
+    color: var(--navy);
+    margin-top: 5px;
+}
+
+.dashboard-section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+}
+
+.dashboard-section h2 {
+    color: var(--navy);
+    margin-bottom: 18px;
+}
+
+.trip-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.trip-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.trip-list-item strong {
+    color: var(--navy);
+}
+
+.trip-list-item small {
+    color: var(--muted);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:700px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.dashboard-section + .dashboard-section {
+    margin-top: 25px;
+}
+
+.trip-list-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.dashboard-empty {
+    color: var(--muted);
+    font-size: 13px;
+}
