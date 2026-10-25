@@ -57,29 +57,29 @@ function Signup() {
 
                 <form className="auth-form" id="signupForm" onSubmit={handleSignup} noValidate>
                     <div>
-                        <label>Full Name</label>
-                        <input type="text" placeholder="Your full name"
+                        <label htmlFor="signup-name">Full Name</label>
+                        <input id="signup-name" type="text" placeholder="Your full name"
                             value={form.name} onChange={set("name")} />
                         {errors.name && <small className="field-error">{errors.name}</small>}
                     </div>
 
                     <div>
-                        <label>Email Address</label>
-                        <input type="email" placeholder="you@example.com"
+                        <label htmlFor="signup-email">Email Address</label>
+                        <input id="signup-email" type="email" placeholder="you@gmail.com"
                             value={form.email} onChange={set("email")} />
                         {errors.email && <small className="field-error">{errors.email}</small>}
                     </div>
 
                     <div>
-                        <label>Phone Number</label>
-                        <input type="tel" placeholder="+91 XXXXX XXXXX"
+                        <label htmlFor="signup-phone">Phone Number</label>
+                        <input id="signup-phone" type="tel" placeholder="+91 XXXXX XXXXX"
                             value={form.phone} onChange={set("phone")} />
                         {errors.phone && <small className="field-error">{errors.phone}</small>}
                     </div>
 
                     <div>
-                        <label>Password</label>
-                        <input type="password" placeholder="Create password"
+                        <label htmlFor="signup-password">Password</label>
+                        <input id="signup-password" type="password" placeholder="Create password"
                             value={form.password} onChange={set("password")} />
                         {errors.password && <small className="field-error">{errors.password}</small>}
                     </div>

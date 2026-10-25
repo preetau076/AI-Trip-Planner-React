@@ -92,8 +92,8 @@ function Contact() {
 
                         <form onSubmit={sendMessage} noValidate>
                             <div className="input-group">
-                                <label>Name</label>
-                                <input type="text" placeholder="Your name"
+                                <label htmlFor="contact-name">Name</label>
+                                <input id="contact-name" type="text" placeholder="Your name"
                                     value={senderName} readOnly={locked} style={lockedStyle}
                                     onChange={(e) => setGuestName(e.target.value)} />
                                 {errors.name && <small className="field-error">{errors.name}</small>}
@@ -102,8 +102,8 @@ function Contact() {
                             <br />
 
                             <div className="input-group">
-                                <label>Email</label>
-                                <input type="email" placeholder="Your email address"
+                                <label htmlFor="contact-email">Email</label>
+                                <input id="contact-email" type="email" placeholder="Your email address"
                                     value={senderEmail} readOnly={locked} style={lockedStyle}
                                     onChange={(e) => setGuestEmail(e.target.value)} />
                                 {errors.email && <small className="field-error">{errors.email}</small>}
@@ -118,8 +118,8 @@ function Contact() {
                             <br />
 
                             <div className="input-group">
-                                <label>Message</label>
-                                <textarea placeholder="Write your message..." maxLength={MAX_MESSAGE}
+                                <label htmlFor="contact-message">Message</label>
+                                <textarea id="contact-message" placeholder="Write your message..." maxLength={MAX_MESSAGE}
                                     value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                                 {errors.message && <small className="field-error">{errors.message}</small>}
                             </div>

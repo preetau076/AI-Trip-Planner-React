@@ -163,10 +163,11 @@ function Payment() {
                                 <p style={{ marginBottom: "10px" }}>
                                     ✔ You said you have paid. One last step:
                                 </p>
-                                <label style={{ display: "block", marginBottom: "6px" }}>
+                                <label htmlFor="payment-utr" style={{ display: "block", marginBottom: "6px" }}>
                                     UPI transaction number (UTR), optional
                                 </label>
                                 <input
+                                    id="payment-utr"
                                     type="text"
                                     inputMode="numeric"
                                     maxLength={12}

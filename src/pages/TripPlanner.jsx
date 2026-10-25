@@ -114,26 +114,26 @@ function TripPlanner() {
                         </div>
                         <div className="form-grid">
                             <div className="input-group">
-                                <label>Full Name <span>*</span></label>
-                                <input type="text" placeholder="Enter your full name"
+                                <label htmlFor="planner-name">Full Name <span>*</span></label>
+                                <input id="planner-name" type="text" placeholder="Enter your full name"
                                     value={form.name} onChange={set("name")} />
                                 {errors.name && <small className="field-error">{errors.name}</small>}
                             </div>
                             <div className="input-group">
-                                <label>Phone Number <span>*</span></label>
-                                <input type="tel" placeholder="+91 XXXXX XXXXX"
+                                <label htmlFor="planner-phone">Phone Number <span>*</span></label>
+                                <input id="planner-phone" type="tel" placeholder="+91 XXXXX XXXXX"
                                     value={form.phone} onChange={set("phone")} />
                                 {errors.phone && <small className="field-error">{errors.phone}</small>}
                             </div>
                             <div className="input-group">
-                                <label>Email Address</label>
-                                <input type="email" placeholder="you@example.com"
+                                <label htmlFor="planner-email">Email Address</label>
+                                <input id="planner-email" type="email" placeholder="you@gmail.com"
                                     value={form.email} onChange={set("email")} />
                                 {errors.email && <small className="field-error">{errors.email}</small>}
                             </div>
                             <div className="input-group">
-                                <label>Current City</label>
-                                <input type="text" placeholder="e.g. Ahmedabad"
+                                <label htmlFor="planner-city">Current City</label>
+                                <input id="planner-city" type="text" placeholder="e.g. Ahmedabad"
                                     value={form.city} onChange={set("city")} />
                             </div>
                         </div>
@@ -146,8 +146,8 @@ function TripPlanner() {
                             <div><h2>Trip Details</h2><p>Tell us about your dream trip</p></div>
                         </div>
                         <div className="input-group">
-                            <label>Where would you like to go?</label>
-                            <input type="text" list="destination-options" placeholder="Enter destination or leave blank"
+                            <label htmlFor="planner-destination">Where would you like to go?</label>
+                            <input id="planner-destination" type="text" list="destination-options" placeholder="Enter destination or leave blank"
                                 value={form.destination} onChange={set("destination")}
                                 disabled={form.suggest} />
                                 <datalist id="destination-options">
@@ -161,8 +161,8 @@ function TripPlanner() {
                         </label>
                         <div className="form-grid">
                             <div className="input-group">
-                                <label>Number of Travelers <span>*</span></label>
-                                <select value={form.travelers} onChange={set("travelers")}>
+                                <label htmlFor="planner-travelers">Number of Travelers <span>*</span></label>
+                                <select id="planner-travelers" value={form.travelers} onChange={set("travelers")}>
                                     <option value="">Select travelers</option>
                                     {["1 Person", "2 People", "3 People", "4 People", "5 People", "6 People", "7+ People"].map((o) => (
                                         <option key={o}>{o}</option>
@@ -171,8 +171,8 @@ function TripPlanner() {
                                 {errors.travelers && <small className="field-error">{errors.travelers}</small>}
                             </div>
                             <div className="input-group">
-                                <label>Trip Duration</label>
-                                <select value={form.duration} onChange={set("duration")}>
+                                <label htmlFor="planner-duration">Trip Duration</label>
+                                <select id="planner-duration" value={form.duration} onChange={set("duration")}>
                                     <option value="">Select duration</option>
                                     {["1 - 2 Days", "3 - 4 Days", "5 - 7 Days", "8 - 14 Days", "15+ Days"].map((o) => (
                                         <option key={o}>{o}</option>
@@ -180,8 +180,8 @@ function TripPlanner() {
                                 </select>
                             </div>
                             <div className="input-group">
-                                <label>Preferred Travel Date</label>
-                                <input
+                                <label htmlFor="planner-date">Preferred Travel Date</label>
+                                <input id="planner-date" 
                                     type="date"
                                     value={form.travelDate}
                                     onChange={set("travelDate")}
@@ -262,8 +262,8 @@ function TripPlanner() {
                         </div>
                         <div className="form-grid">
                             <div className="input-group">
-                                <label>Accommodation</label>
-                                <select value={form.accommodation} onChange={set("accommodation")}>
+                                <label htmlFor="planner-accommodation">Accommodation</label>
+                                <select id="planner-accommodation" value={form.accommodation} onChange={set("accommodation")}>
                                     <option value="">Select accommodation</option>
                                     {["Budget Hotel", "3 Star Hotel", "4 Star Hotel", "5 Star Hotel", "Resort", "No Preference"].map((o) => (
                                         <option key={o}>{o}</option>
@@ -271,8 +271,8 @@ function TripPlanner() {
                                 </select>
                             </div>
                             <div className="input-group">
-                                <label>Transportation</label>
-                                <select value={form.transport} onChange={set("transport")}>
+                                <label htmlFor="planner-transport">Transportation</label>
+                                <select id="planner-transport" value={form.transport} onChange={set("transport")}>
                                     <option value="">Select transportation</option>
                                     {["Flight", "Train", "Bus", "Car / Cab", "Own Vehicle", "No Preference"].map((o) => (
                                         <option key={o}>{o}</option>
@@ -289,8 +289,8 @@ function TripPlanner() {
                             <div><h2>Additional Information</h2><p>Anything else we should know?</p></div>
                         </div>
                         <div className="input-group">
-                            <label>Special Requirements</label>
-                            <textarea
+                            <label htmlFor="planner-special">Special Requirements</label>
+                            <textarea id="planner-special" 
                                 placeholder="Tell us about food preferences, activities or special requirements..."
                                 value={form.special} onChange={set("special")}></textarea>
                         </div>

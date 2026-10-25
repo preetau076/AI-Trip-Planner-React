@@ -21,7 +21,7 @@ export const destinations = [
         type: "Beach",
         typeLabel: "🏖️ Beach",
         tags: ["Beach", "Family", "Nightlife", "Food", "Relaxation"],
-        price: 23000,
+        price: 22000,
         
         days: 4,
         image: img("photo-1512343879784-a960bf40e7f2"),

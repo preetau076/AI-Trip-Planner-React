@@ -32,10 +32,9 @@ function Header() {
                 {user ? (
                     <>
                         <Link className="nav-login" to="/dashboard">Dashboard</Link>
-                        <a className="nav-signup" onClick={logout} role="button" tabIndex={0}
-                           onKeyDown={(e) => e.key === "Enter" && logout()}>
+                        <button type="button" className="nav-signup" onClick={logout}>
                             Logout
-                        </a>
+                        </button>
                     </>
                 ) : (
                     <>

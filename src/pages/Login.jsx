@@ -59,10 +59,11 @@ function Login() {
 
                 <form className="auth-form" id="loginForm" onSubmit={handleLogin} noValidate>
                     <div>
-                        <label>Email Address</label>
-                        <input
+                        <label htmlFor="login-email">Email Address</label>
+                        <input 
+                            id="login-email"
                             type="email"
-                            placeholder="you@example.com"
+                            placeholder="you@gmail.com"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
@@ -70,8 +71,9 @@ function Login() {
                     </div>
 
                     <div>
-                        <label>Password</label>
+                        <label htmlFor="login-password">Password</label>
                         <input
+                            id="login-password"
                             type="password"
                             placeholder="Enter password"
                             value={password}

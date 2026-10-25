@@ -438,3 +438,37 @@ footer {
     font-size: 11px;
     margin-top: 14px;
 }
+
+/* Logout is a real <button>: make it look like the other menu items */
+.nav button.nav-signup {
+    border: none;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+/* Visible focus ring for keyboard users (links and buttons) */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+    outline: 3px solid var(--teal);
+    outline-offset: 3px;
+}
+
+/* "Skip to content" link: hidden until a keyboard user tabs onto it */
+.skip-link {
+    position: absolute;
+    left: 12px;
+    top: -60px;
+    background: var(--navy);
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    z-index: 2000;
+}
+
+.skip-link:focus {
+    top: 12px;
+}
