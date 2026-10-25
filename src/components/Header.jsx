@@ -9,7 +9,7 @@ function Header() {
     const user = useUser();
     const navigate = useNavigate();
     const { showToast } = useToast();
-
+    
     const logout = () => {
         clearUser();
         showToast("You have been logged out. 👋");
