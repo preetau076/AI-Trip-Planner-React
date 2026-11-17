@@ -9,6 +9,7 @@ import { dateLimits, emailPattern, phonePattern, messages } from "../utils/valid
 import { destinations } from "../data/destinations";
 import "../css/common.css";
 import "../css/trip-planner.css";
+import { trackTripRequest } from "../utils/tracking";
 
 const TRIP_TYPES = [
     ["Beach", "🏖️"], ["Adventure", "🏔️"], ["Nature", "🌿"], ["Historical", "🏛️"],
@@ -93,6 +94,7 @@ function TripPlanner() {
         const results = recommendDestinations(request);
 
         saveTripRequest(request, results);
+        trackTripRequest(request, results);
         navigate("/results");
     };
 

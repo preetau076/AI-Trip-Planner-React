@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../hooks/useStorage";
 import { clearUser } from "../utils/storage";
 import { useToast } from "../context/toastContext";
+import { logoutAccount } from "../utils/auth";
 
 function Header() {
     const [open, setOpen] = useState(false);
@@ -11,9 +12,10 @@ function Header() {
     const { showToast } = useToast();
     
     const logout = () => {
-        clearUser();
-        showToast("You have been logged out. 👋");
-        navigate("/");
+    logoutAccount();
+    clearUser();
+    showToast("You have been logged out. 👋");
+    navigate("/");
     };
 
     return (

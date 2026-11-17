@@ -85,6 +85,7 @@ export function clearUser() {
         // the last planner form / results belong to the user who just left
         sessionStorage.removeItem(REQUEST_KEY);
         sessionStorage.removeItem(RESULTS_KEY);
+        sessionStorage.removeItem("tripRequestId");
         window.dispatchEvent(new Event(STORAGE_EVENT));
     } catch {
         /* ignore */
@@ -194,9 +195,19 @@ function newPaymentRef() {
 }
 
 /** Reuses an unfinished payment for the same trip, otherwise creates a new one. */
-export function findOrCreatePayment({ destinationId, travelers, days, amount }) {
+export function findOrCreatePayment({
+    destinationId,
+    travelers,
+    days,
+    amount,
+    accommodation,
+    transport,
+    tripRequestId
+}) {
     if (!getUser()?.email) return null;
     const list = getPayments();
+    const stay = accommodation || "No Preference";
+    const mode = transport || "No Preference";
 
     const open = list.find(
         (p) =>
@@ -205,9 +216,24 @@ export function findOrCreatePayment({ destinationId, travelers, days, amount }) 
             p.destinationId === destinationId &&
             p.travelers === travelers &&
             p.days === days &&
-            p.amount === amount
+            p.amount === amount &&
+            (p.accommodation || "No Preference") === stay &&
+            (p.transport || "No Preference") === mode
     );
-    if (open) return open;
+
+    if (open) {
+        // Same trip again: just link it to the newest planner request
+        if (tripRequestId && open.tripRequestId !== tripRequestId) {
+            const updated = { ...open, tripRequestId };
+            write(
+                localStorage,
+                userKey(PAYMENTS_KEY),
+                list.map((p) => (p.paymentRef === open.paymentRef ? updated : p))
+            );
+            return updated;
+        }
+        return open;
+    }
 
     const payment = {
         paymentRef: newPaymentRef(),
@@ -215,6 +241,9 @@ export function findOrCreatePayment({ destinationId, travelers, days, amount }) 
         travelers,
         days,
         amount,
+        accommodation: stay,
+        transport: mode,
+        tripRequestId: tripRequestId ?? null,
         status: "Incomplete",
         userPaidClicked: false,
         userDebitConfirmed: false,

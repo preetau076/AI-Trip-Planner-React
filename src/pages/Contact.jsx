@@ -4,7 +4,7 @@ import { useToast } from "../context/toastContext";
 import { useUser } from "../hooks/useStorage";
 import { CONTACT } from "../config/site";
 import { emailPattern, messages } from "../utils/validation";
-
+import { trackContact } from "../utils/tracking";
 import "../css/common.css";
 import "../css/contact.css";
 
@@ -55,7 +55,8 @@ function Contact() {
         }
         setErrors(found);
         if (Object.keys(found).length) return;
-
+        
+        trackContact({ name: senderName, email: senderEmail, message });
         if (!CONTACT.email) {
             showToast("The contact email is not set up yet. ⚠️");
             return;

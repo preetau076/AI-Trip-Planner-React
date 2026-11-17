@@ -1,58 +1,39 @@
 /*
-  Frontend-only account check. Passwords are salted + hashed (SHA-256) before
-  being stored, but this is still NOT real security: anyone can open DevTools
-  and edit localStorage. Replace both functions with API calls when a backend exists.
+  Sign up, login and logout talk to the Node.js server, which stores the account
+  in the PostgreSQL `users` table (the password is hashed there) and keeps the
+  login session in a cookie that JavaScript cannot read.
+  The website keeps only { id, name, email, phone } so it can show who is logged in.
 */
-import { getAccounts, saveAccounts, setUser } from "./storage";
-
-const toHex = (bytes) => Array.from(bytes, (b) => b.toString(16).padStart(2, "0")).join("");
-
-function newSalt() {
-    return toHex(crypto.getRandomValues(new Uint8Array(16)));
-}
-
-async function hashPassword(password, salt) {
-    const data = new TextEncoder().encode(salt + password);
-    const digest = await crypto.subtle.digest("SHA-256", data);
-    return toHex(new Uint8Array(digest));
-}
+import { api } from "./api";
+import { clearUser, getUser, setUser } from "./storage";
 
 export async function registerAccount({ name, email, phone, password }) {
-    try {
-        const key = email.trim().toLowerCase();
-        const accounts = getAccounts();
+    const result = await api("/signup", { method: "POST", body: { name, email, phone, password } });
+    if (!result.ok) return { ok: false, error: result.error };
 
-        if (accounts.some((a) => a.email === key)) {
-            return { ok: false, error: "An account with this email already exists. Please login." };
-        }
-
-        const salt = newSalt();
-        const passwordHash = await hashPassword(password, salt);
-        const saved = saveAccounts([
-            ...accounts,
-            { name: name.trim(), email: key, phone: phone.trim(), salt, passwordHash }
-        ]);
-        if (!saved) return { ok: false, error: "Could not save the account in this browser." };
-
-        setUser({ name: name.trim(), email: key, phone: phone.trim() });
-        return { ok: true };
-    } catch {
-        return { ok: false, error: "Something went wrong. Please try again." };
-    }
+    setUser(result.data.user);
+    return { ok: true };
 }
 
 export async function loginAccount(email, password) {
-    try {
-        const key = email.trim().toLowerCase();
-        const account = getAccounts().find((a) => a.email === key);
-        const invalid = { ok: false, error: "Invalid email or password." };
+    const result = await api("/login", { method: "POST", body: { email, password } });
+    if (!result.ok) return { ok: false, error: result.error };
 
-        if (!account) return invalid;
-        if ((await hashPassword(password, account.salt)) !== account.passwordHash) return invalid;
+    setUser(result.data.user);
+    return { ok: true };
+}
 
-        setUser({ name: account.name, email: account.email, phone: account.phone });
-        return { ok: true };
-    } catch {
-        return { ok: false, error: "Something went wrong. Please try again." };
-    }
+/** Ends the login session on the server. (The caller also clears the saved user.) */
+export const logoutAccount = () => api("/logout", { method: "POST" });
+
+/*
+  Asks the server whether the saved login is still valid, for example after the
+  session expired. The user is logged out here ONLY when the server answers 401,
+  so a stopped server or a bad connection never logs anyone out.
+*/
+export async function verifySession() {
+    if (!getUser()) return;
+
+    const result = await api("/me");
+    if (result.status === 401) clearUser();
 }

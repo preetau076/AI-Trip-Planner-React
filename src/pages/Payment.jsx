@@ -9,7 +9,7 @@ import { getDestination } from "../data/destinations";
 import { formatINR } from "../utils/budget";
 import { updatePayment } from "../utils/storage";
 import { buildUpiLink, isValidUpiId } from "../utils/upi";
-
+import { trackPayment } from "../utils/tracking";
 import "../css/common.css";
 
 const card = {
@@ -85,6 +85,7 @@ function Payment() {
 
     const handlePaid = () => {
         updatePayment(payment.paymentRef, { userPaidClicked: true });
+        trackPayment({ ...payment, userPaidClicked: true });
         showToast("Thanks! One more step below. 👇");
     };
 
@@ -96,6 +97,7 @@ function Payment() {
         }
         setUtrError("");
         updatePayment(payment.paymentRef, { userDebitConfirmed: true, utr: value });
+        trackPayment({ ...payment, userPaidClicked: true, userDebitConfirmed: true, utr: value });
         showToast("Payment details recorded. ✅");
     };
 

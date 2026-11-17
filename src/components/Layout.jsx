@@ -4,6 +4,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import ToastProvider from "./ToastProvider";
 import ErrorBoundary from "./ErrorBoundary";
+import { verifySession } from "../utils/auth";
 
 function ScrollToTop() {
     const { pathname } = useLocation();
@@ -46,6 +47,10 @@ const NO_FOOTER = ["/login", "/signup"];
 
 function Layout() {
     const { pathname } = useLocation();
+    // Once, when the site opens: check the saved login is still valid on the server
+    useEffect(() => {
+        verifySession();
+    }, []);
     return (
         <ToastProvider>
             <ScrollToTop />

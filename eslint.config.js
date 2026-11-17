@@ -18,4 +18,9 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
+  {
+    // The Node.js server uses Node's own globals (process, Buffer ...)
+    files: ['server/**/*.js'],
+    languageOptions: { globals: globals.node },
+  },
 ])

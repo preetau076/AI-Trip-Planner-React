@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import PageBanner from "../components/PageBanner";
 import { useSavedTrips, useUser } from "../hooks/useStorage";
@@ -11,6 +11,7 @@ import WeatherNow from "../components/WeatherNow";
 import "../css/common.css";
 import "../css/trip-details.css";
 import { withFallback } from "../utils/image";
+import { getTripRequestId, trackActivity, trackPayment, trackSavedTrip } from "../utils/tracking";
 
 function TripDetails() {
     const navigate = useNavigate();
@@ -25,6 +26,14 @@ function TripDetails() {
 
     useEffect(() => {
         document.title = trip ? "TripSuggest | " + trip.title : "TripSuggest | Trip Not Found";
+    }, [trip]);
+
+    // Record which trip the user looked at (the ref stops a double entry while developing)
+    const lastViewed = useRef(null);
+    useEffect(() => {
+        if (!trip || lastViewed.current === trip.id) return;
+        lastViewed.current = trip.id;
+        trackActivity("trip_viewed", { destination: trip.id });
     }, [trip]);
 
     if (!trip) {
@@ -66,25 +75,30 @@ function TripDetails() {
     const saved = isSaved(trip.id);
     
     const handlePay = () => {
-    if (!user) {
-        navigate("/login", { state: { from: location.pathname + location.search } });
-        return;
-    }
-    const payment = findOrCreatePayment({
-        destinationId: trip.id,
-        travelers: budget.people,
-        days: budget.days,
-        amount: Math.round(budget.total)
-    });
-    if (!payment) {
-        showToast("Could not start the payment. Please try again.");
-        return;
-    }
-    navigate(`/payment?ref=${encodeURIComponent(payment.paymentRef)}`);
+        if (!user) {
+            navigate("/login", { state: { from: location.pathname + location.search } });
+            return;
+        }
+        const payment = findOrCreatePayment({
+            destinationId: trip.id,
+            travelers: budget.people,
+            days: budget.days,
+            amount: Math.round(budget.total),
+            accommodation: request?.accommodation,
+            transport: request?.transport,
+            tripRequestId: request ? getTripRequestId() : null
+        });
+        if (!payment) {
+            showToast("Could not start the payment. Please try again.");
+            return;
+        }
+        trackPayment(payment);
+        navigate(`/payment?ref=${encodeURIComponent(payment.paymentRef)}`);
     };
 
     const handleSave = () => {
         const nowSaved = toggle(trip.id);
+        trackSavedTrip(trip.id, nowSaved);
         showToast(
             nowSaved
                 ? trip.title + " saved to your dashboard ❤️"
